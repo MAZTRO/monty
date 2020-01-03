@@ -6,6 +6,7 @@
 #include <sys/uio.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include <string.h>
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -44,5 +45,6 @@ void pall(stack_t **stack, unsigned int value);
 void pint(stack_t **stack, unsigned int value);
 void pop(stack_t **stack, unsigned int value);
 void swap(stack_t **stack, unsigned int value);
+char **getTokens(char *entrada, char *delim);
 
 #endif

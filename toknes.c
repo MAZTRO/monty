@@ -2,7 +2,7 @@
 /**
  * getTokens - function that generate Tokens
  * @entrada : data of input argv[1]
- * @TokenT: array that have the all command of input since screen
+ * @delim : array that have the all command of input since screen
  * Return: Always TokenT
  **/
 char **getTokens(char *entrada, char *delim)

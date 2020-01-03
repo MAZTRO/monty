@@ -3,7 +3,7 @@
 /**
   * push - Function that add an item to stack
   * @stack : pointer of input
-  * @item: int of input
+  * @value : int of input
   **/
 
 void push(stack_t **stack, unsigned int value)
@@ -11,7 +11,8 @@ void push(stack_t **stack, unsigned int value)
 	stack_t *aux;
 
 	aux = malloc(sizeof(aux));
-	if (aux == NULL) return (EXIT_FAILURE);
+	if (aux == NULL)
+		exit(EXIT_FAILURE);
 	if (*stack == NULL)
 	{
 		*stack = aux;
@@ -32,14 +33,17 @@ void push(stack_t **stack, unsigned int value)
 /**
  * pall - Function that print date in the screen
  * @stack : pointer of input
- * @item: int of input
+ * @value :  int of input
+ * @stack: double pointer of input
  */
 
 void pall(stack_t **stack, unsigned int value)
 {
+	value = value;
 	size_t count = 0;
 
-	if (!stack) return(EXIT_SUCCESS);
+	if (!stack)
+		exit(EXIT_SUCCESS);
 	for (count = 0; *stack != NULL; count++)
 	{
 		printf("%d\n", (*stack)->n);
@@ -50,14 +54,15 @@ void pall(stack_t **stack, unsigned int value)
 /**
  * pint - Function that print date in the screen
  * @stack : pointer of input
- * @item: int of input
+ * @value : int of input
+ * @stack : double pointer of input
  */
 
 void pint(stack_t **stack, unsigned int value)
 {
 	if (!stack)
 	{
-		fprintf(stderr, "L%lu: can't pint, stack empty\n", value);
+		fprintf(stderr, "L%u: can't pint, stack empty\n", value);
 		exit(EXIT_FAILURE);
 	}
 	else
@@ -67,7 +72,8 @@ void pint(stack_t **stack, unsigned int value)
 /**
  * pop - Function that remove the top element of the stack
  * @stack : pointer of input
- * @item: int of input
+ * @value : int of input
+ * @stack : double pointer of input
  */
 
 void pop(stack_t **stack, unsigned int value)
@@ -76,7 +82,7 @@ void pop(stack_t **stack, unsigned int value)
 
 	if (stack == NULL)
 	{
-		fprintf(stderr, "L%lu: can't pop an empty stack\n", value);
+		fprintf(stderr, "L%u: can't pop an empty stack\n", value);
 		exit(EXIT_FAILURE);
 	}
 	else
@@ -91,13 +97,13 @@ void pop(stack_t **stack, unsigned int value)
 
 /**
  * swap - Function that print date in the screen
- * @stack : pointer of input
- * @item: int of input
+ * @value : int of input
+ * @stack : double pointer of input
  */
 
 void swap(stack_t **stack, unsigned int value)
 {
-	stack_t *aux;
+	stack_t *aux = NULL;
 	int temp = 0, count = 0;
 
 	while ((*stack)->next != NULL)
@@ -107,7 +113,7 @@ void swap(stack_t **stack, unsigned int value)
 	}
 	if (count < 2)
 	{
-		fprintf(stderr, "L%lu: can't swap, stack too short\n", value);
+		fprintf(stderr, "L%u: can't swap, stack too short\n", value);
 		exit(EXIT_FAILURE);
 	}
 	else
