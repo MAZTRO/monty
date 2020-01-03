@@ -60,7 +60,8 @@ void pint(stack_t **stack, unsigned int value)
 		fprintf(stderr, "L%lu: can't pint, stack empty\n", value);
 		exit(EXIT_FAILURE);
 	}
-	printf("%d\n", (*stack)->n);
+	else
+		printf("%d\n", (*stack)->n);
 }
 
 /**
@@ -74,13 +75,18 @@ void pop(stack_t **stack, unsigned int value)
 	stack_t *aux;
 
 	if (stack == NULL)
+	{
 		fprintf(stderr, "L%lu: can't pop an empty stack\n", value);
 		exit(EXIT_FAILURE);
-	aux = *stack;
-	*stack = aux->next;
-	aux->next = NULL;
-	(*stack)->prev = NULL;
-	free(aux);
+	}
+	else
+	{
+		aux = *stack;
+		*stack = aux->next;
+		aux->next = NULL;
+		(*stack)->prev = NULL;
+		free(aux);
+	}
 }
 
 /**
@@ -92,10 +98,23 @@ void pop(stack_t **stack, unsigned int value)
 void swap(stack_t **stack, unsigned int value)
 {
 	stack_t *aux;
-	int temp = 0;
+	int temp = 0, count = 0;
 
-	aux = aux->next;
-	temp = aux->n;
-	aux->n = (*stack)->n;
-	(*stack)->n = temp;
+	while ((*stack)->next != NULL)
+	{
+		*stack = (*stack)->next;
+		count++;
+	}
+	if (count < 2)
+	{
+		fprintf(stderr, "L%lu: can't swap, stack too short\n", value);
+		exit(EXIT_FAILURE);
+	}
+	else
+	{
+		aux = aux->next;
+		temp = aux->n;
+		aux->n = (*stack)->n;
+		(*stack)->n = temp;
+	}
 }
