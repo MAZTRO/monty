@@ -13,7 +13,7 @@ void (*get_comparation(char *s))(stack_t, unsigned int)
 		{"pall", pall},
 		{"pint", pint},
 		{"pop", pop},
-		{"swap", suwap},
+		{"swap", swap},
 		{NULL, NULL}
 	};
 int count = 0;
@@ -22,11 +22,10 @@ int count = 0;
 	{
 		if (strcmp(opfun[count].opcode, s) == 0)
 		{
-			return (opfun[count].f);
+			opfun[count].f();
 		}
 		count++;
 	}
-	return (NULL);
 }
 
 /**
@@ -38,10 +37,13 @@ int count = 0;
   **/
 void main(int argc, char *argv[])
 {
-	char **linea = NULL;
+	char **line = NULL, char **fun = NULL, char *delim = NULL;
+	stack_t structure;
+	unsigned int line_number = 0;
+	count_1 = 0;
 
-	linea = malloc(sizeof(char *) * 64);
-	if (linea == NULL)
+	line = malloc(sizeof(char *) * 64);
+	if (line == NULL)
 		exit(EXIT_FAILURE);
 	if (argc != 2)
 	{
@@ -50,4 +52,15 @@ void main(int argc, char *argv[])
 	}
 	else
 	{
-		linea = get
+		delim = "\n";
+		line = getTokens(argv[1], delim);
+		delim = " ";
+		while (line != NULL)
+		{
+			fun = getTokens(line[count_1], delim);
+			line_number = fun[count_1 + 1];
+			(*get_comparition(fun[count_1]))(structure, line_number);
+			count_1++;
+		}
+	}
+}
