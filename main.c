@@ -18,7 +18,7 @@ void get_comparation(char *s, stack_t **structure)
 	};
 int count = 0;
 
-	while (opfun[count].opcode)
+	while (opfun[count].opcode && count <= 4)
 	{
 		if (strcmp(opfun[count].opcode, s) == 0)
 		{

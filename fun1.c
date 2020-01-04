@@ -39,9 +39,9 @@ void push(stack_t **stack, unsigned int value)
 
 void pall(stack_t **stack, unsigned int value)
 {
-	value = value;
 	size_t count = 0;
 
+	value = value;
 	if (!stack)
 		exit(EXIT_SUCCESS);
 	for (count = 0; *stack != NULL; count++)
