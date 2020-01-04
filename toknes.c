@@ -16,7 +16,8 @@ char **getTokens(char *entrada, char *delim)
 	aux = strtok(entrada, delim);
 	while (aux != NULL)
 	{
-		TokenT[i] = aux;
+		if (*aux != ' ')
+			TokenT[i] = aux;
 		aux = strtok(NULL, delim);
 		i++;
 	}

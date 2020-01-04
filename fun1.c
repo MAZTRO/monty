@@ -42,6 +42,7 @@ void pall(stack_t **stack, unsigned int value)
 	size_t count = 0;
 
 	value = value;
+	printf("Hola\n");
 	if (!stack)
 		exit(EXIT_SUCCESS);
 	for (count = 0; *stack != NULL; count++)
