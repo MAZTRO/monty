@@ -22,6 +22,11 @@ int get_comparation(char *s, stack_t **structure)
 
 	while (opfun[count].opcode && count <= 4)
 	{
+        if (strcmp(opfun[count].opcode, "push") != 0)
+        {
+			opfun[count].f(structure, value);
+			return (count);
+        }
 		if (strcmp(opfun[count].opcode, s) == 0)
 		{
 	        s = strtok(NULL, " \n");
