@@ -47,5 +47,7 @@ void pop(stack_t **stack, unsigned int value);
 void swap(stack_t **stack, unsigned int value);
 char *getTokens(char *entrada, char *delim);
 int get_comparation(char *s, stack_t **structure);
+void free_all(FILE *ID, stack_t **stack);
+void free_other(FILE *ID, stack_t **stack);
 
 #endif

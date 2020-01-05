@@ -51,15 +51,16 @@ int main(int argc, char *argv[])
 			if (test > 4 && line == NULL)
 			{
 				fprintf(stderr, "L%d: unknown instruction %s\n", count + 1, fun);
-				exit(EXIT_FAILURE);
+				free_all(ID, &structure);
 			}
 			else if (test == -10)
 			{
 				fprintf(stderr, "L%d: usage: push integer\n", count + 1);
-				exit(EXIT_FAILURE);
+				free_all(ID, &structure);
 			}
 			count++;
 		}
 	}
+	free_other(ID, &structure);
 	return (EXIT_SUCCESS);
 }
