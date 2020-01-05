@@ -5,7 +5,7 @@
   * @s : the function
   * @structure : double poinetr of input
   *
-  * Return : the function
+  * Return: the function
   **/
 int get_comparation(char *s, stack_t **structure)
 {
@@ -22,25 +22,24 @@ int get_comparation(char *s, stack_t **structure)
 
 	while (opfun[count].opcode && count <= 4)
 	{
-	printf("opfun: %s, count: %s\n", opfun[count].opcode, s);
-        if (strcmp(opfun[count].opcode, "push") != 0)
-        {
+		if (strcmp(opfun[count].opcode, "push") != 0)
+		{
 			if (strcmp(opfun[count].opcode, s) == 0)
 			{
 				opfun[count].f(structure, value);
 			}
-        }
+		}
 		else if (strcmp(opfun[count].opcode, s) == 0)
 		{
-	        s = strtok(NULL, " \n");
-            if (s == NULL)
-            {
-                return (-10);
-            }
+			s = strtok(NULL, " \n");
+			if (s == NULL)
+			{
+				return (-10);
+			}
 			else if ((*s > 47 && *s < 58) && s != NULL)
-	        {
-		        value = atoi(s);
-	        }
+			{
+				value = atoi(s);
+			}
 			opfun[count].f(structure, value);
 			return (count);
 		}

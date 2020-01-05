@@ -106,9 +106,9 @@ void pop(stack_t **stack, unsigned int value)
 void swap(stack_t **stack, unsigned int value)
 {
 	stack_t *aux = NULL;
-	int temp = 0, count = 0;
+	int count = 0;
 
-	printf("jonatan\n");
+	aux = *stack;
 	while (*stack != NULL)
 	{
 		*stack = (*stack)->next;
@@ -119,9 +119,10 @@ void swap(stack_t **stack, unsigned int value)
 		fprintf(stderr, "L%u: can't swap, stack too short\n", value);
 		exit(EXIT_FAILURE);
 	}
-	aux = *stack;
 	aux = aux->next;
-	temp = aux->n;
-	aux->n = (*stack)->n;
-	(*stack)->n = temp;
+	aux->prev = NULL;
+	aux->next->prev = *stack;
+	(*stack)->next = aux->next;
+	aux->next = *stack;
+	(*stack)->prev = aux;
 }

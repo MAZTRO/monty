@@ -1,6 +1,14 @@
 #include "monty.h"
 
 /**
+ * 
+ */
+void verification(char **av)
+{
+
+}
+
+/**
   * main - interprete of commands input since screen
   * @argc: count of arguments
   * @argv: arguments of input
@@ -45,12 +53,10 @@ int main(int argc, char *argv[])
 			}
 			else if (test == -10)
 			{
-				/* printf("Count: %d\n", count); */
 				fprintf(stderr, "L%d: usage: push integer\n", count + 1);
 				exit(EXIT_FAILURE);
 			}
 			count++;
-			/* printf("el contador en el ultimo else if del main es: %d\n", count); */
 		}
 	}
 	return (EXIT_SUCCESS);

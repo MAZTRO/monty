@@ -1,7 +1,5 @@
 #include "monty.h"
 
-int global_var;
-
 /**
  * getTokens - function that generate Tokens
  * @entrada : data of input argv[1]
