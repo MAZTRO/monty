@@ -9,10 +9,8 @@
   **/
 int main(int argc, char *argv[])
 {
-	char *line = NULL;
 	FILE *ID;
-	char *fun;
-	char *delim = " \n";
+	char *fun, *delim = " \n", *line = NULL;
 	stack_t *structure;
 	int count = 0, test = 0;
 	size_t bufsize = 1024;
@@ -23,7 +21,6 @@ int main(int argc, char *argv[])
 		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
-
 	if (argc != 2)
 	{
 		fprintf(stderr, "USAGE: monty file\n");
