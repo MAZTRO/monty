@@ -46,5 +46,6 @@ void pint(stack_t **stack, unsigned int value);
 void pop(stack_t **stack, unsigned int value);
 void swap(stack_t **stack, unsigned int value);
 char *getTokens(char *entrada, char *delim);
+int get_comparation(char *s, stack_t **structure);
 
 #endif
