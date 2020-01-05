@@ -1,11 +1,16 @@
 #include "monty.h"
 
 /**
- * 
+ * verification - Test the arguments o files
+ * Return: Nothing
  */
-void verification(char **av)
+void verification(int ac)
 {
-
+	if (ac != 2)
+	{
+		fprintf(stderr, "USAGE: monty file\n");
+		exit(EXIT_FAILURE);
+	}
 }
 
 /**
@@ -23,11 +28,8 @@ int main(int argc, char *argv[])
 	int count = 0, test = 0;
 	size_t bufsize = 1024;
 
-	if (argc != 2)
-	{
-		fprintf(stderr, "USAGE: monty file\n");
-		exit(EXIT_FAILURE);
-	}
+	verification(argc);
+
 	line = malloc(sizeof(char *) * 64);
 	if (line == NULL)
 	{
