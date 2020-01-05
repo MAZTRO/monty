@@ -20,14 +20,15 @@ int get_comparation(char *s, stack_t **structure)
 	int value = 0;
 	int count = 0;
 
-	if (*s > 47 && *s < 58)
-	{
-		value = atoi(s);
-	}
 	while (opfun[count].opcode && count <= 4)
 	{
 		if (strcmp(opfun[count].opcode, s) == 0)
 		{
+	        s = strtok(NULL, " \n");
+            if ((*s > 47 && *s < 58) && s != NULL)
+	        {
+		        value = atoi(s);
+	        }
 			opfun[count].f(structure, value);
 			return (count);
 		}

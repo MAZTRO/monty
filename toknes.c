@@ -14,7 +14,5 @@ char *getTokens(char *entrada, char *delim)
 	char *TokenT = NULL;
 
 	TokenT = strtok(entrada, delim);
-	TokenT = strtok(NULL, delim);
-	printf("TOKEN: %s\n", TokenT);
 	return (TokenT);
 }
