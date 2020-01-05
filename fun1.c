@@ -40,14 +40,16 @@ void push(stack_t **stack, unsigned int value)
 void pall(stack_t **stack, unsigned int value)
 {
 	size_t count = 0;
+	stack_t *aux = NULL;
 
+	aux = *stack;
 	value = value;
 	if (!stack)
 		exit(EXIT_SUCCESS);
-	for (count = 0; (*stack)->next != NULL; count++)
+	for (count = 0; aux->next != NULL; count++)
 	{
-		printf("%d\n", (*stack)->n);
-		*stack = (*stack)->next;
+		printf("%d\n", aux->n);
+		aux = aux->next;
 	}
 }
 
@@ -106,7 +108,8 @@ void swap(stack_t **stack, unsigned int value)
 	stack_t *aux = NULL;
 	int temp = 0, count = 0;
 
-	while ((*stack)->next != NULL)
+	printf("jonatan\n");
+	while (*stack != NULL)
 	{
 		*stack = (*stack)->next;
 		count++;
@@ -116,11 +119,9 @@ void swap(stack_t **stack, unsigned int value)
 		fprintf(stderr, "L%u: can't swap, stack too short\n", value);
 		exit(EXIT_FAILURE);
 	}
-	else
-	{
-		aux = aux->next;
-		temp = aux->n;
-		aux->n = (*stack)->n;
-		(*stack)->n = temp;
-	}
+	aux = *stack;
+	aux = aux->next;
+	temp = aux->n;
+	aux->n = (*stack)->n;
+	(*stack)->n = temp;
 }

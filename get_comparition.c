@@ -22,20 +22,22 @@ int get_comparation(char *s, stack_t **structure)
 
 	while (opfun[count].opcode && count <= 4)
 	{
+	printf("opfun: %s, count: %s\n", opfun[count].opcode, s);
         if (strcmp(opfun[count].opcode, "push") != 0)
         {
-			opfun[count].f(structure, value);
-			return (count);
+			if (strcmp(opfun[count].opcode, s) == 0)
+			{
+				opfun[count].f(structure, value);
+			}
         }
-		if (strcmp(opfun[count].opcode, s) == 0)
+		else if (strcmp(opfun[count].opcode, s) == 0)
 		{
 	        s = strtok(NULL, " \n");
             if (s == NULL)
             {
-                fprintf(stderr, "L%d: usage: push integer\n", count);
-				exit(EXIT_FAILURE);
+                return (-10);
             }
-            if ((*s > 47 && *s < 58) && s != NULL)
+			else if ((*s > 47 && *s < 58) && s != NULL)
 	        {
 		        value = atoi(s);
 	        }

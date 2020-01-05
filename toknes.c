@@ -14,5 +14,10 @@ char *getTokens(char *entrada, char *delim)
 	char *TokenT = NULL;
 
 	TokenT = strtok(entrada, delim);
+	if (TokenT == NULL)
+	{
+		TokenT = "";
+		return (TokenT);
+	}
 	return (TokenT);
 }
