@@ -62,7 +62,7 @@ void pall(stack_t **stack, unsigned int value)
 
 void pint(stack_t **stack, unsigned int value)
 {
-	if (!stack)
+	if (!stack || !*stack)
 	{
 		fprintf(stderr, "L%u: can't pint, stack empty\n", value);
 		exit(EXIT_FAILURE);
