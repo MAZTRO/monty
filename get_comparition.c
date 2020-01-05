@@ -30,6 +30,11 @@ int get_comparation(char *s, stack_t **structure)
 		if (strcmp(opfun[count].opcode, s) == 0)
 		{
 	        s = strtok(NULL, " \n");
+            if (s == NULL)
+            {
+                fprintf(stderr, "L%d: usage: push integer\n", count);
+				exit(EXIT_FAILURE);
+            }
             if ((*s > 47 && *s < 58) && s != NULL)
 	        {
 		        value = atoi(s);
