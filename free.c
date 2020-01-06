@@ -1,38 +1,17 @@
 #include "monty.h"
 /**
-  *
-  *
-  *
+  * free_all - function that free the memory of the stack
+  * @ID:
+  * @stack:
   **/
-void free_all(FILE *ID, stack_t **stack)
+void free_all(stack_t *stack)
 {
 	stack_t *current;
 
-	fclose(ID);
-	while (*stack != NULL)
+	while (stack != NULL)
 	{
-		current = *stack;
-		*stack = (*stack)->next;
-		free(current);
+		current = stack->next;
+		free(stack);
+		stack = current;
 	}
-	exit(EXIT_FAILURE);
-}
-/**
-  *
-  *
-  *
-  *
-  **/
-void free_other(FILE *ID, stack_t **stack)
-{
-	stack_t *current;
-
-	fclose(ID);
-	while (*stack != NULL)
-	{
-		current = *stack;
-		*stack = (*stack)->next;
-		free(current);
-	}
-	exit(EXIT_FAILURE);
 }

@@ -1,5 +1,4 @@
 #include "monty.h"
-
 /**
  * verification - Test the arguments o files
  * Return: Nothing
@@ -12,7 +11,6 @@ void verification(int ac)
 		exit(EXIT_FAILURE);
 	}
 }
-
 /**
   * main - interprete of commands input since screen
   * @argc: count of arguments
@@ -22,43 +20,33 @@ void verification(int ac)
   **/
 int main(int argc, char *argv[])
 {
+
 	FILE *ID;
-	char *fun, *delim = " \n", *line = NULL;
-	stack_t *structure;
-	int count = 0, test = 0;
-	size_t bufsize = 1024;
+	char *buffer = NULL;
+	size_t get, number;
+	unsigned int line = 0;
+	stack_t *stack;
 
 	verification(argc);
-
-	line = malloc(sizeof(char *) * 64);
-	if (line == NULL)
+	stack = NULL;
+	ID = fopen(argv[1], "r");
+	if (ID == NULL)
 	{
-		fprintf(stderr, "Error: malloc failed\n");
+		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
 		exit(EXIT_FAILURE);
 	}
-	else
-	{
-		ID = fopen(argv[1], "r");
-		if (ID == NULL)
+	get = getline(&buffer, &number, ID);
+	while (get != -1)
 		{
-			fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
-			exit(EXIT_FAILURE);
+			line++;
+			if(buffer[get - 1] == '\n')
+				buffer[get - 1] = '\0';
+			get_compare(buffer, line, &stack);
+			free(buffer);
+			buffer = NULL;
+			get = getline(&buffer, &number, ID);
 		}
-		while ((getline(&line, &bufsize, ID)) != -1)
-		{
-			fun = getTokens(line, delim);
-			test = get_comparation(fun, &structure);
-			if (test > 4 && line == NULL)
-			{
-				fprintf(stderr, "L%d: unknown instruction %s\n", count + 1, fun);
-			}
-			else if (test == -10)
-			{
-				fprintf(stderr, "L%d: usage: push integer\n", count + 1);
-			}
-			count++;
-		}
-	}
-	fclose(ID);
-	return (EXIT_SUCCESS);
+		free(buffer);
+		free_all(stack);
+	return(EXIT_SUCCESS);
 }

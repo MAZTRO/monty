@@ -15,12 +15,14 @@ int get_comparation(char *s, stack_t **structure)
 		{"pint", pint},
 		{"pop", pop},
 		{"swap", swap},
+		{"add", add},
+		{"nop", nop},
 		{NULL, NULL}
 	};
 	int value = 0;
 	int count = 0;
 
-	while (opfun[count].opcode && count <= 4)
+	while (opfun[count].opcode && count <= 6)
 	{
 		if (strcmp(opfun[count].opcode, "push") != 0)
 		{

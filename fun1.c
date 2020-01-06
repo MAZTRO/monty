@@ -6,27 +6,44 @@
   * @value : int of input
   **/
 
-void push(stack_t **stack, unsigned int value)
+void push(stack_t **stack, char *value)
 {
 	stack_t *aux;
+	stack_t *aux2;
 
 	aux = malloc(sizeof(aux));
+	aux2 = *stack;
 	if (aux == NULL)
+	{
+		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
+	}
+	aux->n = atoi(value);
+	aux->prev = NULL;
+	aux->next = NULL;
 	if (*stack == NULL)
 	{
-		*stack = aux;
-		(*stack)->prev = NULL;
-		(*stack)->next = NULL;
-		(*stack)->n = value;
+		aux->next = (*stack);
+		if(*stack)
+		{
+			(*stack)->prev = aux;
+		}
 	}
 	else
 	{
-		aux->next = *stack;
-		(*stack)->prev = aux;
-		aux->prev = NULL;
-		aux->n = value;
-		*stack = aux;
+		if(*stack == NULL)
+		{
+			*stack = aux;
+		}
+		else
+		{
+			while (aux2->next != NULL)
+			{
+				aux2 = aux2->next;
+			}
+			aux2->next = aux;
+			aux->prev = aux2;
+		}
 	}
 }
 
@@ -40,9 +57,8 @@ void push(stack_t **stack, unsigned int value)
 void pall(stack_t **stack, unsigned int value)
 {
 	size_t count = 0;
-	stack_t *aux = NULL;
+	stack_t *aux = *stack;
 
-	aux = *stack;
 	value = value;
 	if (!stack)
 		exit(EXIT_SUCCESS);
@@ -62,13 +78,12 @@ void pall(stack_t **stack, unsigned int value)
 
 void pint(stack_t **stack, unsigned int value)
 {
-	if (!stack || !*stack)
+	if (stack == NULL || *stack == NULL)
 	{
 		fprintf(stderr, "L%u: can't pint, stack empty\n", value);
 		exit(EXIT_FAILURE);
 	}
-	else
-		printf("%d\n", (*stack)->n);
+	printf("%d\n", (*stack)->n);
 }
 
 /**
@@ -82,19 +97,18 @@ void pop(stack_t **stack, unsigned int value)
 {
 	stack_t *aux;
 
-	if (stack == NULL)
+	if (stack == NULL || *stack == NULL)
 	{
 		fprintf(stderr, "L%u: can't pop an empty stack\n", value);
 		exit(EXIT_FAILURE);
 	}
-	else
+	aux = *stack;
+	if (aux->next)
 	{
-		aux = *stack;
-		*stack = aux->next;
-		aux->next = NULL;
-		(*stack)->prev = NULL;
-		free(aux);
+		aux->next->prev = NULL;
 	}
+	*stack = aux->next;
+	free(aux);
 }
 
 /**
@@ -105,24 +119,18 @@ void pop(stack_t **stack, unsigned int value)
 
 void swap(stack_t **stack, unsigned int value)
 {
-	stack_t *aux = NULL;
+	stack_t *aux = *stack;
+	stack_t *aux2 = (*stack)->next;
 	int count = 0;
 
-	aux = *stack;
-	while (*stack != NULL)
-	{
-		*stack = (*stack)->next;
-		count++;
-	}
-	if (count < 2)
+	if (stack == NULL || *stack == NULL || aux2 == NULL)
 	{
 		fprintf(stderr, "L%u: can't swap, stack too short\n", value);
 		exit(EXIT_FAILURE);
 	}
-	aux = aux->next;
-	aux->prev = NULL;
-	aux->next->prev = *stack;
-	(*stack)->next = aux->next;
-	aux->next = *stack;
-	(*stack)->prev = aux;
+
+	aux2 = (*stack)->next;
+	count = aux->n;
+	aux->n = aux2->n;
+	aux2->n = count;
 }
