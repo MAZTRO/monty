@@ -6,44 +6,27 @@
   * @value : int of input
   **/
 
-void push(stack_t **stack, char *value)
+void push(stack_t **stack, unsigned int value)
 {
 	stack_t *aux;
-	stack_t *aux2;
 
 	aux = malloc(sizeof(aux));
-	aux2 = *stack;
 	if (aux == NULL)
-	{
-		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
-	}
-	aux->n = atoi(value);
-	aux->prev = NULL;
-	aux->next = NULL;
 	if (*stack == NULL)
 	{
-		aux->next = (*stack);
-		if(*stack)
-		{
-			(*stack)->prev = aux;
-		}
+		*stack = aux;
+		(*stack)->prev = NULL;
+		(*stack)->next = NULL;
+		(*stack)->n = value;
 	}
 	else
 	{
-		if(*stack == NULL)
-		{
-			*stack = aux;
-		}
-		else
-		{
-			while (aux2->next != NULL)
-			{
-				aux2 = aux2->next;
-			}
-			aux2->next = aux;
-			aux->prev = aux2;
-		}
+		aux->next = *stack;
+		(*stack)->prev = aux;
+		aux->prev = NULL;
+		aux->n = value;
+		*stack = aux;
 	}
 }
 
@@ -62,7 +45,7 @@ void pall(stack_t **stack, unsigned int value)
 	value = value;
 	if (!stack)
 		exit(EXIT_SUCCESS);
-	for (count = 0; aux != NULL; count++)
+	for (count = 0; aux->next != NULL; count++)
 	{
 		printf("%d\n", aux->n);
 		aux = aux->next;
