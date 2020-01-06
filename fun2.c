@@ -4,17 +4,18 @@
   * @stack: double pointer of input
   * @value: int of input
   **/
-void add(stack_t **stack, unsigned int value)
+void add(stack_t **stack, unsigned int line_number, unsigned int value)
 {
 	int increase = 0;
 
+	line_number = line_number;
 	if (stack == NULL || *stack == NULL || (*stack)->next == NULL)
 	{
 		fprintf(stderr, "L%u: can't add, stack too short\n", value);
 		exit(EXIT_FAILURE);
 	}
 	increase = (*stack)->n + (*stack)->next->n;
-	pop(stack, value);
+	pop(stack, line_number, value);
 	(*stack)->n = increase;
 }
 /**
@@ -22,8 +23,9 @@ void add(stack_t **stack, unsigned int value)
   * @stack: double pointer of input
   * @value: int of input
   **/
-void nop(stack_t **stack, unsigned int value)
+void nop(stack_t **stack, unsigned int line_number, unsigned int value)
 {
 	stack = stack;
+	line_number = line_number;
 	value = value;
 }

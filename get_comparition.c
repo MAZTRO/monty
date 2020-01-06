@@ -7,7 +7,7 @@
   *
   * Return: the function
   **/
-int get_comparation(char *s, stack_t **structure)
+int get_comparation(char *Token, stack_t **structure, unsigned int ln_num)
 {
 	instruction_t opfun[] = {
 		{"push", push},
@@ -19,33 +19,36 @@ int get_comparation(char *s, stack_t **structure)
 		{"nop", nop},
 		{NULL, NULL}
 	};
-	int value = 0;
+	int value = 0, data = 0;
 	int count = 0;
 
 	while (opfun[count].opcode && count <= 6)
 	{
 		if (strcmp(opfun[count].opcode, "push") != 0)
 		{
-			if (strcmp(opfun[count].opcode, s) == 0)
+			if (strcmp(opfun[count].opcode, Token) == 0)
 			{
-				opfun[count].f(structure, value);
+				opfun[count].f(structure, ln_num, value);
 			}
 		}
-		else if (strcmp(opfun[count].opcode, s) == 0)
+		else if (strcmp(opfun[count].opcode, Token) == 0)
 		{
-			s = strtok(NULL, " \n");
-			if (s == NULL)
+			printf("Hola\n");
+			count = isdigit(atoi(Token));
+			printf("Count: %d\n", count);
+			Token = strtok(NULL, " \n");
+			if (Token == NULL)
 			{
-				return (-10);
+				data = 2;
+				case_error_1(structure, ln_num, data);
 			}
-			else if ((*s > 47 && *s < 58) && s != NULL)
+			else if (isdigit(Token) != 0 && Token != NULL)
 			{
-				value = atoi(s);
+				value = atoi(Token);
 			}
-			opfun[count].f(structure, value);
-			return (count);
+			opfun[count].f(structure, ln_num, value);
+			count++;
 		}
-		count++;
 	}
-	return (count);
+	return (-1);
 }

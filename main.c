@@ -5,7 +5,7 @@
  * @ac: integer.
  * Return: Nothing
  */
-void verification(int ac)
+void verify_arguments(int ac)
 {
 	if (ac != 2)
 	{
@@ -24,42 +24,35 @@ void verification(int ac)
 int main(int argc, char *argv[])
 {
 	FILE *ID;
-	char *fun, *delim = " \n", *line = NULL;
-	stack_t *structure;
-	int count = 0, test = 0;
-	size_t bufsize = 1024;
+	char *line = NULL, *Token = NULL;
+	stack_t *structure = NULL;
+	unsigned int count = 0; 
+	int test = 0;
+	size_t bufsize = 256;
 
-	verification(argc);
-	line = malloc(sizeof(char *) * 64);
-	if (line == NULL)
+	verify_arguments(argc);
+
+	ID = fopen(argv[1], "r");
+	if (ID == NULL)
 	{
-		fprintf(stderr, "Error: malloc failed\n"), exit(EXIT_FAILURE);
+		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
+		exit(EXIT_FAILURE);
 	}
-	else
+	while ((getline(&line, &bufsize, ID)) != -1)
 	{
-		ID = fopen(argv[1], "r");
-		if (ID == NULL)
+		Token = strtok(line, " \n");
+		if (Token == NULL) {Token = ""; }
+		test = get_comparation(Token, &structure, count);
+		if (test == -1)
 		{
-			fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
+			fprintf(stderr, "L%u: unknown instruction %s\n", count, Token);
+			free_all(&structure);
+			fclose(ID);
 			exit(EXIT_FAILURE);
 		}
-		while ((getline(&line, &bufsize, ID)) != -1)
-		{
-			fun = getTokens(line, delim);
-			test = get_comparation(fun, &structure);
-			if (test > 4 && line == NULL)
-			{
-				fprintf(stderr, "L%d: unknown instruction %s\n", count + 1, fun);
-				free_all(structure), exit(EXIT_FAILURE);
-			}
-			else if (test == -10)
-			{
-				fprintf(stderr, "L%d: usage: push integer\n", count + 1);
-				free_all(structure), exit(EXIT_FAILURE);
-			}
-			count++;
-		}
+		count++;
 	}
 	fclose(ID);
+	free(line);
 	return (EXIT_SUCCESS);
 }
