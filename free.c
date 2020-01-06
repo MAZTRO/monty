@@ -3,14 +3,14 @@
   * free_all - function that free the memory of the stack
   * @stack: Estructure
   **/
-void free_all(stack_t *stack)
+void free_all(stack_t **stack)
 {
-	stack_t *current;
+	stack_t *head;
 
-	while (stack != NULL)
+	while (*stack != NULL)
 	{
-		current = stack->next;
-		free(stack);
-		stack = current;
+		head = *stack;
+		*stack = (*stack)->next;
+		free(head);
 	}
 }
