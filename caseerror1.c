@@ -6,7 +6,7 @@
   * @line_number: number of line
   * @caso: pointer of input
   **/
-void case_error_1(FILE ID, stack_t **strcuture, int line_number, int data, char * opcode)
+void case_error_1(FILE ID, stack_t **strcuture, unsigned int line_number, unsigned int data, char * opcode)
 {
 	switch(data)
 			{
