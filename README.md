@@ -64,6 +64,6 @@ $ ./monty bytecodes/01.m
 | queue | sets the format of the data to a queue (FIFO).|
 
 ## Authors
-[Andres\ Felipe\ Garcia] (https://github.com/andres0191/) y [Jonatan\ Mazo\ Castro] (https://github.com/MAZTRO/).
+[Andres Felipe Garcia](https://github.com/andres0191/) y [Jonatan Mazo Castro](https://github.com/MAZTRO/).
 
 ### Thanks for read.
