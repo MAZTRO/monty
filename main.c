@@ -2,6 +2,7 @@
 
 /**
  * verification - Test the arguments o files
+ * @ac: integer.
  * Return: Nothing
  */
 void verification(int ac)
@@ -29,12 +30,10 @@ int main(int argc, char *argv[])
 	size_t bufsize = 1024;
 
 	verification(argc);
-
 	line = malloc(sizeof(char *) * 64);
 	if (line == NULL)
 	{
-		fprintf(stderr, "Error: malloc failed\n");
-		exit(EXIT_FAILURE);
+		fprintf(stderr, "Error: malloc failed\n"), exit(EXIT_FAILURE);
 	}
 	else
 	{
@@ -51,10 +50,12 @@ int main(int argc, char *argv[])
 			if (test > 4 && line == NULL)
 			{
 				fprintf(stderr, "L%d: unknown instruction %s\n", count + 1, fun);
+				free_all(&structure), exit(EXIT_FAILURE);
 			}
 			else if (test == -10)
 			{
 				fprintf(stderr, "L%d: usage: push integer\n", count + 1);
+				free_all(&structure), exit(EXIT_FAILURE);
 			}
 			count++;
 		}

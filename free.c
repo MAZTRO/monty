@@ -1,8 +1,7 @@
 #include "monty.h"
 /**
   * free_all - function that free the memory of the stack
-  * @ID:
-  * @stack:
+  * @stack: Estructure
   **/
 void free_all(stack_t *stack)
 {
