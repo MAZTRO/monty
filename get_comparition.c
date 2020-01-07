@@ -24,6 +24,7 @@ int get_comparation(char *Token, stack_t **structure, unsigned int ln_num)
 
 	while (opfun[count].opcode && count <= 6)
 	{
+		printf("Opfun: %s\n Token en primer while: %s\n", opfun[count].opcode, Token);
 		if (strcmp(opfun[count].opcode, "push") != 0)
 		{
 			if (strcmp(opfun[count].opcode, Token) == 0)
@@ -33,16 +34,13 @@ int get_comparation(char *Token, stack_t **structure, unsigned int ln_num)
 		}
 		else if (strcmp(opfun[count].opcode, Token) == 0)
 		{
-			printf("Hola\n");
-			count = isdigit(atoi(Token));
-			printf("Count: %d\n", count);
 			Token = strtok(NULL, " \n");
 			if (Token == NULL)
 			{
 				data = 2;
 				case_error_1(structure, ln_num, data);
 			}
-			else if (isdigit(Token) != 0 && Token != NULL)
+			if ((*Token >= 48 && *Token <= 57) && (Token != NULL))
 			{
 				value = atoi(Token);
 			}

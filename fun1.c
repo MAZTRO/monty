@@ -11,12 +11,17 @@ void push(stack_t **stack, unsigned int line_number, unsigned int value)
 	stack_t *aux;
 	unsigned int data = 0;
 
+	printf("estoy en push\n");
 	aux = malloc(sizeof(aux));
 	if (aux == NULL)
+	{
 		data = 1;
 		case_error_1(stack, line_number, data);
+	}
+	printf("Estoy en line 21\n");
 	if (*stack == NULL)
 	{
+		printf("estoy en push line 21\n");
 		*stack = aux;
 		(*stack)->prev = NULL;
 		(*stack)->next = NULL;
@@ -24,6 +29,7 @@ void push(stack_t **stack, unsigned int line_number, unsigned int value)
 	}
 	else
 	{
+		printf("estoy en push line 28\n");
 		aux->next = *stack;
 		(*stack)->prev = aux;
 		aux->prev = NULL;
@@ -46,10 +52,12 @@ void pall(stack_t **stack, unsigned int line_number, unsigned int value)
 
 	line_number = line_number;
 	value = value;
+	printf("estoy en pall ");
 	if (!stack)
 		exit(EXIT_SUCCESS);
 	for (count = 0; aux != NULL; count++)
 	{
+		printf("holi");
 		printf("%d\n", aux->n);
 		aux = aux->next;
 	}
