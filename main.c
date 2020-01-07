@@ -42,7 +42,7 @@ int main(int argc, char *argv[])
 	{
 		Token = strtok(line, " \n");
 		if (Token == NULL)
-		{Token = ""; }
+		{continue; }
 		test = get_comparation(Token, &structure, count);
 		if (test == -1)
 		{

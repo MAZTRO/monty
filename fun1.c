@@ -52,7 +52,7 @@ void pall(stack_t **stack, unsigned int line_number, unsigned int value)
 	value = value;
 	if (!stack)
 		exit(EXIT_SUCCESS);
-	for (count = 0; aux != NULL; count++)
+	for (count = 0; aux->next != NULL; count++)
 	{
 		printf("%d\n", aux->n);
 		aux = aux->next;
