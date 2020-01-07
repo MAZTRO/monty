@@ -2,6 +2,7 @@
 /**
   * add - function that add  the top two elements of the stack.
   * @stack: double pointer of input
+  * @line_number: Number of a line
   * @value: int of input
   **/
 void add(stack_t **stack, unsigned int line_number, unsigned int value)
@@ -21,6 +22,7 @@ void add(stack_t **stack, unsigned int line_number, unsigned int value)
 /**
   * nop - The opcode nop doesnt do anything.
   * @stack: double pointer of input
+  * @line_number: Number of a line
   * @value: int of input
   **/
 void nop(stack_t **stack, unsigned int line_number, unsigned int value)

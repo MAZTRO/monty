@@ -2,9 +2,9 @@
 
 /**
   * get_comparation - compare the function whit the data of input (entrada)
-  * @s : the function
-  * @structure : double poinetr of input
-  *
+  * @Token: the function
+  * @structure: double poinetr of input
+  * @ln_num: line of the bytecode
   * Return: the function
   **/
 int get_comparation(char *Token, stack_t **structure, unsigned int ln_num)
@@ -20,17 +20,14 @@ int get_comparation(char *Token, stack_t **structure, unsigned int ln_num)
 		{NULL, NULL}
 	};
 	int value = 0, data = 0;
-	int count = 0;
+	int count = 0, status = 0;
 
 	while (opfun[count].opcode && count <= 6)
 	{
-		printf("Opfun: %s\n Token en primer while: %s\n", opfun[count].opcode, Token);
 		if (strcmp(opfun[count].opcode, "push") != 0)
 		{
 			if (strcmp(opfun[count].opcode, Token) == 0)
-			{
-				opfun[count].f(structure, ln_num, value);
-			}
+			{opfun[count].f(structure, ln_num, value), status = 1; }
 		}
 		else if (strcmp(opfun[count].opcode, Token) == 0)
 		{
@@ -41,12 +38,14 @@ int get_comparation(char *Token, stack_t **structure, unsigned int ln_num)
 				case_error_1(structure, ln_num, data);
 			}
 			if ((*Token >= 48 && *Token <= 57) && (Token != NULL))
-			{
-				value = atoi(Token);
-			}
-			opfun[count].f(structure, ln_num, value);
-			count++;
+			{value = atoi(Token); }
+			opfun[count].f(structure, ln_num, value), status = 1;
+			return (0);
 		}
+		count++;
 	}
-	return (-1);
+	if (count == 7 && status == 0)
+	{return (-1); }
+	else
+	{return (0); }
 }

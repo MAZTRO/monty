@@ -3,8 +3,8 @@
   * case_error_1 - functiont that execute one case error depend of the optino.
   * @ID: Date of input
   * @structure: double pointer of input
-  * @line_number: number of line
-  * @caso: pointer of input
+  * @ln_num: number of line
+  * @data: pointer of input
   **/
 void case_error_1(stack_t **structure, unsigned int ln_num, unsigned int data)
 {

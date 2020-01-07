@@ -1,7 +1,7 @@
 #include "monty.h"
 
 /**
- * verification - Test the arguments o files
+ * verify_arguments - Test the arguments o files
  * @ac: integer.
  * Return: Nothing
  */
@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
 	FILE *ID;
 	char *line = NULL, *Token = NULL;
 	stack_t *structure = NULL;
-	unsigned int count = 0;
+	unsigned int count = 1;
 	int test = 0;
 	size_t bufsize = 1024;
 
@@ -40,10 +40,9 @@ int main(int argc, char *argv[])
 	}
 	while ((getline(&line, &bufsize, ID)) != -1)
 	{
-		printf("Token: %s\n", Token);
 		Token = strtok(line, " \n");
-		printf("Token line 45: %s\n", Token);
-		if (Token == NULL) {Token = ""; }
+		if (Token == NULL)
+		{Token = ""; }
 		test = get_comparation(Token, &structure, count);
 		if (test == -1)
 		{
